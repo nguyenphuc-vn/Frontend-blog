@@ -1,0 +1,21 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+#left_input{
+    float: left;
+    width: 75vw;
+    margin: 10px 15px 15px 15px;
+}
+input{
+    height: 30px;
+}
+#title_input{
+    width: 100%;
+    
+}
+#tag_div{
+    display: inline-block;
+}
+#body_input p{
+    min-height: 75vh;
+}
