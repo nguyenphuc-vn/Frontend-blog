@@ -27,8 +27,8 @@ let save = document.getElementById('save-btn');
   let title = document.getElementById('title_input').value;
   let tag = getTag();
   let bodyInput = document.getElementById("body_input");
-  let content = bodyInput.children[0].textContent;
-  console.log(tag);
+  let content = bodyInput.children[0].innerHTML;
+
    fetch('http://localhost:8080/api/article/create',{
     method: 'POST',
     mode: "cors",
