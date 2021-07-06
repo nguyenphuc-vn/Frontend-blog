@@ -4,6 +4,7 @@ let current = urlParam.get('page');
 const board = document.querySelector('.table');
 const boardTBody = board.querySelector('.article-table-body');
 const pageLink = document.querySelector('.article-paging');
+
 function showPage(){ 
   getPage().then((result)=>{
     showTable(result);
@@ -13,7 +14,7 @@ function showPage(){
 
 async function getPage() {
   
-  let response = await fetch(`http://localhost:8080/api/articles/?`+urlParam);
+  let response = await fetch(`http://localhost:8080/api/articles/`+urlParam);
   let data = await response.json()
   //console.log(data);
   return data;
@@ -34,13 +35,24 @@ function showTable(result){
     boardBodyTitle.innerHTML =result.articles[i].title;
 
     const boardBodyBody = document.createElement('td');
-    boardBodyBody.innerHTML = result.articles[i].body;
+    boardBodyBody.innerHTML = result.articles[i].body.slice(0,100)+'<br>...';
 
     const boardBodyTag = document.createElement('td');
     for(let j=0;j<result.articles[i].tags.length;j++){
-      boardBodyTag.innerHTML = result.articles[i].tags[j].name;
+      boardBodyTag.innerHTML += result.articles[i].tags[j].name+' ';
     }
-    boardBodyRow.append(boardBodyId,boardBodyTitle,boardBodyBody,boardBodyTag);
+    const boardAction = document.createElement('td');
+
+    const info = document.createElement('a');
+    info.innerHTML = 'INFO '; 
+    
+    info.href = './admin-article.html?'+result.articles[i].id;
+    const deleteAction = document.createElement('a'); 
+    deleteAction.innerHTML = 'DELETE';
+
+
+    boardAction.append(info,deleteAction);
+    boardBodyRow.append(boardBodyId,boardBodyTitle,boardBodyBody,boardBodyTag,boardAction);
     boardTBody.append(boardBodyRow);
     board.append(boardTBody);
   } 
@@ -50,7 +62,7 @@ function showNavigation(result){
   if(current ==null){
     current =1;
   }
-  if(current >1){
+  if(result.prevEnabled){
     const prevLink = document.createElement('a');
     prevLink.title = 'go to previous page';
     prevLink.href ='javascript:showPage()';

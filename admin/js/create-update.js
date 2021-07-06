@@ -14,21 +14,46 @@ const quill = new Quill('#body_input',{
     toolbar: toolbarOptions
   },
   theme : 'snow'
- 
-
 });
 
-//console.log(body);
 
+let bodyInput = document.getElementById("body_input");
+let idUrl = Number(location.search.substr(1));
+console.log(idUrl);
+ 
+async function getData(){   
+    let res = await fetch('http://localhost:8080/api/article/'+idUrl);
+    let result = await res.json();
+    console.log(result);
+    return result;
+}
+ function fillData(){  
+   if(Number.isInteger(idUrl)){
+    getData().then((result)=>{
+      const title = document.getElementById('title_input');
+      title.value = result.title;
+      console.log(title.value);
+      const content = bodyInput.children[0];
+      content.innerHTML = result.body;
+      const tag = document.getElementById('tag_input');
+      for(let i=0;i<result.tags.length;i++){
+        tag.value += result.tags[i].name;
+      }
+    })
+ }
+}
+fillData();
 
-let save = document.getElementById('save-btn');
+ const save = document.getElementById('save-btn');
  save.addEventListener('click', (e)=>{
   e.preventDefault();
   let title = document.getElementById('title_input').value;
-  let tag = getTag();
-  let bodyInput = document.getElementById("body_input");
   let content = bodyInput.children[0].innerHTML;
-
+  let tag = getTag();
+  let id = 0;
+  if(Number.isInteger(idUrl)){
+    id = idUrl;
+  }
    fetch('http://localhost:8080/api/article/create',{
     method: 'POST',
     mode: "cors",
@@ -36,9 +61,9 @@ let save = document.getElementById('save-btn');
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       "Access-Control-Allow-Origin" : "*", 
-      "Access-Control-Allow-Credentials" : true 
     },
     body: JSON.stringify({
+      id:id,
       title: title,
       body: content,
       tags: tag
@@ -53,7 +78,7 @@ let save = document.getElementById('save-btn');
   });
 })
 function getTag(){
- let tag = document.getElementById('tag_input').value;
+ let tag = document.getElementById('tag_input').value; 
  let tagAr = tag.split(',');
  let tags = [];
 
