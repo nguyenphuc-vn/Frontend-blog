@@ -18,9 +18,8 @@ const quill = new Quill('#body_input',{
 
 
 let bodyInput = document.getElementById("body_input");
-let idUrl = Number(location.search.substr(1));
-console.log(idUrl);
- 
+let idUrl = location.search ==''? ' ':Number(location.search.substr(1));
+
 async function getData(){   
     let res = await fetch('http://localhost:8080/api/article/'+idUrl);
     let result = await res.json();
@@ -28,6 +27,7 @@ async function getData(){
     return result;
 }
  function fillData(){  
+
    if(Number.isInteger(idUrl)){
     getData().then((result)=>{
       const title = document.getElementById('title_input');
@@ -49,6 +49,7 @@ fillData();
   e.preventDefault();
   let title = document.getElementById('title_input').value;
   let content = bodyInput.children[0].innerHTML;
+  console.log(content);
   let tag = getTag();
   let id = 0;
   if(Number.isInteger(idUrl)){
@@ -79,7 +80,7 @@ fillData();
 })
 function getTag(){
  let tag = document.getElementById('tag_input').value; 
- let tagAr = tag.split(',');
+ let tagAr = tag.split(`\w`);
  let tags = [];
 
  for(let i =0;i<tagAr.length;i++){

@@ -14,7 +14,7 @@ function showPage(){
 
 async function getPage() {
   
-  let response = await fetch(`http://localhost:8080/api/articles/`+urlParam);
+  let response = await fetch(`http://localhost:8080/api/articles/?`+urlParam);
   let data = await response.json()
   //console.log(data);
   return data;
@@ -24,12 +24,12 @@ function showTable(result){
   
   //console.log(board); 
   for(let i=0;i<result.articles.length;i++){
-    
+    let id = result.articles[i].id;
     const boardBodyRow = document.createElement('tr');
     boardBodyRow.className = 'boardBodyRow';
 
     const boardBodyId = document.createElement('td');
-    boardBodyId.innerHTML = result.articles[i].id;
+    boardBodyId.innerHTML = id;
     
     const boardBodyTitle = document.createElement('td');
     boardBodyTitle.innerHTML =result.articles[i].title;
@@ -49,13 +49,26 @@ function showTable(result){
     info.href = './admin-article.html?'+result.articles[i].id;
     const deleteAction = document.createElement('a'); 
     deleteAction.innerHTML = 'DELETE';
-
-
+    deleteAction.href = 'javascript:deleteArticle('+id+')';
+    
     boardAction.append(info,deleteAction);
     boardBodyRow.append(boardBodyId,boardBodyTitle,boardBodyBody,boardBodyTag,boardAction);
     boardTBody.append(boardBodyRow);
     board.append(boardTBody);
   } 
+}
+ async function deleteArticle(id){
+ let res =  await fetch('http://localhost:8080/api/article/delete/'+Number(id),{
+    method: 'DELETE',
+    mode: "cors",
+    headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin" : "*", 
+    },
+  });
+  let result = await res.text();
+  location.reload();
 }
 function showNavigation(result){
   
