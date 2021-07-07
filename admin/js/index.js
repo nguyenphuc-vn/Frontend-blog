@@ -48,9 +48,10 @@ function showTable(result){
     
     info.href = './admin-article.html?'+result.articles[i].id;
     const deleteAction = document.createElement('a'); 
-    deleteAction.innerHTML = 'DELETE';
+    deleteAction.innerHTML = ' DELETE';  
     deleteAction.href = 'javascript:deleteArticle('+id+')';
-    
+    deleteAction.onclick = isConfirm;
+
     boardAction.append(info,deleteAction);
     boardBodyRow.append(boardBodyId,boardBodyTitle,boardBodyBody,boardBodyTag,boardAction);
     boardTBody.append(boardBodyRow);
@@ -106,7 +107,9 @@ function setStateAndEmptyPage(){
   boardTBody.innerHTML ='';
   pageLink.innerHTML ='';
 }
-
+function isConfirm(){
+  return confirm('Are you sure you want to delete this item?');
+}
 
 showPage();
 

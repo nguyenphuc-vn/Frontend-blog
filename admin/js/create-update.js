@@ -17,7 +17,7 @@ const quill = new Quill('#body_input',{
 });
 
 
-let bodyInput = document.getElementById("body_input");
+
 let idUrl = location.search ==''? ' ':Number(location.search.substr(1));
 
 async function getData(){   
@@ -30,12 +30,15 @@ async function getData(){
 
    if(Number.isInteger(idUrl)){
     getData().then((result)=>{
-      const title = document.getElementById('title_input');
-      title.value = result.title;
-      console.log(title.value);
-      const content = bodyInput.children[0];
+      const title = getTitleInput();
+      title.value = result.title
+      ;
+      const content = getContentInput();
       content.innerHTML = result.body;
-      const tag = document.getElementById('tag_input');
+
+      let isPublished = published();
+      isPublished.checked = result.published;
+      const tag = getTagInput();
       for(let i=0;i<result.tags.length;i++){
         tag.value += result.tags[i].name;
       }
@@ -44,12 +47,13 @@ async function getData(){
 }
 fillData();
 
+ const notif = document.createElement('span');  
  const save = document.getElementById('save-btn');
  save.addEventListener('click', (e)=>{
   e.preventDefault();
-  let title = document.getElementById('title_input').value;
-  let content = bodyInput.children[0].innerHTML;
-  console.log(content);
+  let title = getTitleInput().value;
+  let content = getContentInput().innerHTML;
+  let isPublished = published().checked;
   let tag = getTag();
   let id = 0;
   if(Number.isInteger(idUrl)){
@@ -67,19 +71,22 @@ fillData();
       id:id,
       title: title,
       body: content,
+      published: isPublished,
       tags: tag
     }),
   })
   .then( result =>  result.text())
   .then(data => {
-    console.log('Success:', data);   
+     notif.innerHTML = 'Saved'+ data;
   })
   .catch((error) => {
-    console.error('Error:', error);
+    notif.innerHTML = 'Failed to save' + error;
   });
+  const notification = document.getElementById('notification').append(notif);
 })
+
 function getTag(){
- let tag = document.getElementById('tag_input').value; 
+ let tag = getTagInput().value; 
  let tagAr = tag.split(`\w`);
  let tags = [];
 
@@ -87,4 +94,18 @@ function getTag(){
     tags.push({'name':tagAr[i]});
  }
  return tags;
+}
+
+function getTitleInput(){
+  return document.getElementById('title_input');
+}
+function getContentInput(){
+   let bodyInput = document.getElementById("body_input");
+   return bodyInput.children[0];
+}
+function published(){
+  return document.getElementById('checkbox-input');
+}
+function getTagInput(){
+  return document.getElementById('tag_input');
 }
