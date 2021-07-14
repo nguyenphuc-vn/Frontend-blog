@@ -41,3 +41,8 @@ async function auth(e) {
   }
   
 }
+
+function logout(){
+    localStorage.setItem('app-token','');
+    window.location.href =  "./login.html";
+  }
