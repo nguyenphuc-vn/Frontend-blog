@@ -6,7 +6,7 @@ const boardTBody = board.querySelector(".article-table-body");
 const pageLink = document.querySelector(".article-paging");
 const createUpdateHTML = "./create-update.html?";
 console.log(token);
-if(token ==undefined){
+if(token ==undefined|| token =='' || token ==null){
   window.location.href =  "./login.html";
 }
 

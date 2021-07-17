@@ -17,5 +17,5 @@ input{
     display: inline-block;
 }
 #body_input p{
-    min-height: 75vh;
+    max-height: 75vh;
 }
