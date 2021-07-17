@@ -1,0 +1,10 @@
+.card-body p{
+    text-align: justify;
+}
+.card-body a{
+    float : right;
+    margin-bottom: 3%;
+}
+.mx-auto{
+    width: 50vw;
+}

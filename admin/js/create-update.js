@@ -1,24 +1,45 @@
 const token = localStorage.getItem('app-token');
-if(token ==undefined){
+if(token ==undefined|| token =='' || token ==null){
   window.location.href =  "./login.html";
 }
+console.log(token);
+
 let toolbarOptions = [
   ["bold", "italic", "underline", "strike"],
-  ["image"],
+  ['link',"image"],['blockquote', 'code-block'],
   [{ list: "ordered" }, { list: "bullet" }],
   [{ size: ["small", false, "large", "huge"] }],
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
   [{ color: [] }, { background: [] }],
   [{ align: [] }],
   ["clean"],
+  
 ];
-const quill = new Quill("#body_input", {
+
+
+var quill = new Quill('#body_input', {
+  theme: 'snow',
   modules: {
-    // Equivalent to { toolbar: { container: '#toolbar' }}
-    toolbar: toolbarOptions,
+      toolbar: {
+          container: toolbarOptions,
+          handlers: {
+              image: imageHandler
+          },
+          
+        }
   },
-  theme: "snow",
 });
+
+function imageHandler() {
+  var value = prompt('What is the image URL');
+  if(value){
+      this.quill.insertEmbed(0, 'image', value, 'user');
+      this.quill.formatText(0, 1, 'width', '300px'); 
+  }
+  
+}
+
+
 
 let idUrl = location.search == "" ? " " : Number(location.search.substr(1));
 
