@@ -2,7 +2,7 @@ const token = localStorage.getItem('app-token');
 if(token ==undefined|| token =='' || token ==null){
   window.location.href =  "./login.html";
 }
-console.log(token);
+//console.log(token);
 
 let toolbarOptions = [
   ["bold", "italic", "underline", "strike"],
@@ -44,9 +44,9 @@ function imageHandler() {
 let idUrl = location.search == "" ? " " : Number(location.search.substr(1));
 
 async function getData() {
-  let res = await fetch("http://localhost:8080/api/article/" + idUrl);
+  let res = await fetch("https://personalblog1996.herokuapp.com/api/article/" + idUrl);
   let result = await res.json();
-  console.log(result);
+ // console.log(result);
   return result;
 }
 function fillData() {
@@ -80,7 +80,7 @@ save.addEventListener("click", (e) => {
   if (Number.isInteger(idUrl)) {
     id = idUrl;
   }
-  fetch("http://localhost:8080/api/article/", {
+  fetch("https://personalblog1996.herokuapp.com/api/article/", {
     method: "POST",
     mode: "cors",
     withCredentials: true,

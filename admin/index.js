@@ -5,7 +5,7 @@ const board = document.querySelector(".table");
 const boardTBody = board.querySelector(".article-table-body");
 const pageLink = document.querySelector(".article-paging");
 const createUpdateHTML = "./create-update.html?";
-console.log(token);
+//console.log(token);
 if(token ==undefined|| token =='' || token ==null){
   window.location.href =  "./login.html";
 }
@@ -19,7 +19,7 @@ function showPage() {
 }
 
 async function getPage() {
-  let response = await fetch(`http://localhost:8080/api/articles/?` + urlParam);
+  let response = await fetch(`https://personalblog1996.herokuapp.com/api/articles/?` + urlParam);
   let data = await response.json();
   //console.log(data);
   return data;
@@ -69,7 +69,7 @@ function showTable(result) {
   }
 }
 async function deleteArticle(id) {
-  let res = await fetch("http://localhost:8080/api/article/" + Number(id), {
+  let res = await fetch("https://personalblog1996.herokuapp.com/api/article/" + Number(id), {
     method: "DELETE",
     mode: "cors",
     withCredentials: true,
@@ -82,7 +82,7 @@ async function deleteArticle(id) {
     },
   });
   let result = await res.text();
-  console.log(result);
+  //console.log(result);
   location.reload();
 }
 function showNavigation(result) {

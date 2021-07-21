@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/api/auth/login";
+const url = "https://personalblog1996.herokuapp.com/api/auth/login";
 const submit = document.getElementById("submit-btn");
 let header = new Headers();
 
@@ -31,13 +31,6 @@ async function auth(e) {
   if(response.status == 200){
     localStorage.setItem('app-token', token.jwt);
     window.location.href =  "./index.html";
-    /* let  jwt = JSON.parse(atob(token.split('.')[1]));
-    
-    let iat  = new Date(jwt.iat *1000);
-    let exp = new Date(jwt.exp *1000);
-    console.log(iat);
-    console.log(exp);
-    console.log(jwt); */
   }
   
 }

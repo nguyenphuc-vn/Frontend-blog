@@ -3,12 +3,12 @@ const container = document.querySelector('.mx-auto');
 const articleLink = './article.html?';
 let urlParam = new URLSearchParams();
 let current = urlParam.get("page");
-console.log(current);
+//console.log(current);
 
 async function getArticles() {
-    let res = await fetch("http://localhost:8080/api/articles/?" + urlParam);
+    let res = await fetch("https://personalblog1996.herokuapp.com/api/articles/?" + urlParam);
     let result = await res.json();
-    console.log(result);
+    //console.log(result);
     return result;
 }
 
