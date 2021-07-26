@@ -18,6 +18,8 @@ function getNews(){
 function display(result){
     let title = document.getElementById('title');
     title.innerHTML = result.title;
+    let img = document.getElementById('image');
+    img.src = result.image;
     let content = document.getElementById('content');
     content.innerHTML = result.content;
 }
