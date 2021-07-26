@@ -1,0 +1,33 @@
+body{
+    font-family: 'EB Garamond', serif;
+    font-weight: 400;
+}
+a:hover{
+    color: #000;
+}
+.navbar-custom{
+    border:1px solid #DFC49D;
+    
+} 
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link{
+    color : black;
+}
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .nav-item .nav-link.active,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #9EDDDE;
+}
+
+.navbar-toggler-icon::before{
+    color: #DFC49D;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    content: "\f0c9";  
+}
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}

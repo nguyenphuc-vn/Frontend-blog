@@ -2,8 +2,10 @@ const urlHost = "http://localhost:8080/api/news/";
 //const urlHost = "https://personalblog1996.herokuapp.com";
 const row = document.querySelector('.row');
 const ul = document.querySelectorAll('.pagination')[1];
+const articleLink = getPathFromUrl(window.location.href)+'article.html';
+//console.log(articleLink);
 
-console.log(ul);
+//console.log(ul);
 
 let pageParam = location.search == "" ? Number(1) : Number(location.search.substr(6));
 //console.log(pageParam);
@@ -48,7 +50,8 @@ function previousAndNext(result){
 
 function paginated(result){
     let totalPages = result.totalPages;
-   
+    refreshUl();
+    if(totalPages >=8){   
     if(pageParam+7 >totalPages){
         pageParam = totalPages-7;
     }
@@ -56,8 +59,14 @@ function paginated(result){
     if(pageParam+7 -totalPages >=3){
         current  = pageParam+7 -totalPages;
     }
-    refreshUl();
-     for(let i =current ;i<=pageParam+7;i++){
+    setPageButton(current,pageParam+7,result);
+    } 
+    else
+    setPageButton(1,totalPages,result);
+}
+
+function setPageButton(start,end,result){
+    for(let i =start ;i<=end;i++){
         let items = getItems();      
         if(i == result.number+1){
             items.li.className = 'page-item active';
@@ -66,13 +75,11 @@ function paginated(result){
         }        
         items.anchor.innerHTML = i;
         items.anchor.href = setQueryParam(i);
+        
         switchPage(items.anchor);
-        ul.append(items.li);   
-    } 
-    
+        ul.append(items.li); 
+    }    
 }
-
-
 
 function getSpan(i){
     let span = document.createElement('span');
@@ -125,6 +132,8 @@ function populateData(result){
         img[n].src = news.image;
         let des = document.querySelectorAll('.desc');
         des[n].innerHTML = news.description;
+        let link = document.querySelectorAll('.wrapper');
+        link[n].href = articleLink+'?id='+ news.id;
     }
 }
 function appendRow(newsSize,col){ 
