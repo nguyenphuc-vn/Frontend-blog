@@ -1,0 +1,65 @@
+body{
+    font-family: 'EB Garamond', serif;
+    font-weight: 400;
+}
+img{
+    width: 150px;
+    height: 100px;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+a:hover{
+    color: #000;
+}
+
+a .title:hover{   
+    color: #E0933C;
+}
+
+.navbar-custom{
+    border:1px solid #DFC49D;
+    
+} 
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link{
+    color : black;
+}
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .nav-item .nav-link.active,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #9EDDDE;
+}
+
+.navbar-toggler-icon::before{
+    color: #DFC49D;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    content: "\f0c9";  
+}
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.title{
+    margin: 2%;
+}
+.image{
+    margin: 3%;
+    float: left;
+}
+.desc{
+    position: relative;
+    top: 2%;
+    
+}
+
+.col-lg-6{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+

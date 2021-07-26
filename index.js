@@ -1,3 +1,6 @@
+const urlHost = "http://localhost:8080";
+//const urlHost = "https://personalblog1996.herokuapp.com";
+
 const ul = document.querySelector('.pagination');
 const container = document.querySelector('.mx-auto');
 const articleLink = './article.html?';
@@ -6,7 +9,7 @@ let current = urlParam.get("page");
 //console.log(current);
 
 async function getArticles() {
-    let res = await fetch("https://personalblog1996.herokuapp.com/api/articles/?" + urlParam);
+    let res = await fetch(urlHost+"/api/articles/?" + urlParam);
     let result = await res.json();
     //console.log(result);
     return result;
@@ -21,7 +24,7 @@ function display() {
 }
 function getArticle(result) {
 
-    let size = result.articles.length;
+    let size = result.list.length;
     for (let i = 0; i < size; i++) {
         const card = document.createElement('div');
         card.className = 'card border-light';
@@ -31,15 +34,15 @@ function getArticle(result) {
 
         let h3 = document.createElement('h3');
         h3.className = 'card-title';
-        h3.innerHTML = result.articles[i].title;
+        h3.innerHTML = result.list[i].title;
 
         let p = document.createElement('p');
         p.className = 'card-text';
-        p.innerHTML = sliceArticle(result.articles[i].body);
+        p.innerHTML = sliceArticle(result.list[i].body);
 
         let a = document.createElement('a');
         a.className = 'btn btn-primary';
-        a.href = articleLink + result.articles[i].id;
+        a.href = articleLink + result.list[i].id;
         a.textContent = 'Read More';
 
         cardBody.append(h3, p, a);

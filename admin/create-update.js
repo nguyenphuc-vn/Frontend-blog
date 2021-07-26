@@ -2,6 +2,8 @@ const token = localStorage.getItem('app-token');
 if(token ==undefined|| token =='' || token ==null){
   window.location.href =  "./login.html";
 }
+const urlHost = "http://localhost:8080";
+//const urlHost = "https://personalblog1996.herokuapp.com";
 //console.log(token);
 
 let toolbarOptions = [
@@ -44,7 +46,7 @@ function imageHandler() {
 let idUrl = location.search == "" ? " " : Number(location.search.substr(1));
 
 async function getData() {
-  let res = await fetch("https://personalblog1996.herokuapp.com/api/article/" + idUrl);
+  let res = await fetch(urlHost+"/api/article/" + idUrl);
   let result = await res.json();
  // console.log(result);
   return result;
@@ -80,7 +82,7 @@ save.addEventListener("click", (e) => {
   if (Number.isInteger(idUrl)) {
     id = idUrl;
   }
-  fetch("https://personalblog1996.herokuapp.com/api/article/", {
+  fetch(urlHost+"/api/article/", {
     method: "POST",
     mode: "cors",
     withCredentials: true,
@@ -132,4 +134,8 @@ function getPublished() {
 }
 function getTagInput() {
   return document.getElementById("tag_input");
+}
+function logout(){
+  localStorage.setItem('app-token','');
+  window.location.href =  "./login.html";
 }

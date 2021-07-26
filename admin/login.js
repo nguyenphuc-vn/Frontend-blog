@@ -1,4 +1,6 @@
-const url = "https://personalblog1996.herokuapp.com/api/auth/login";
+const urlHost = "http://localhost:8080";
+//const urlHost = "https://personalblog1996.herokuapp.com";
+const url = urlHost+"/api/auth/login";
 const submit = document.getElementById("submit-btn");
 let header = new Headers();
 
@@ -7,7 +9,7 @@ submit.addEventListener("click", (e) => {
   auth();
 });
 
-async function auth(e) {
+async function auth() {
   let username = document.getElementById("username-input").value;
   //console.log(username);
   let password = document.getElementById("password-input").value;
@@ -35,7 +37,4 @@ async function auth(e) {
   
 }
 
-function logout(){
-    localStorage.setItem('app-token','');
-    window.location.href =  "./login.html";
-  }
+
