@@ -1,5 +1,5 @@
-const urlHost = "http://localhost:8080";
-//const urlHost = "https://personalblog1996.herokuapp.com";
+//const urlHost = "http://localhost:8080";
+const urlHost = "https://personalblog1996.herokuapp.com";
 const url = urlHost+"/api/auth/login";
 const submit = document.getElementById("submit-btn");
 let header = new Headers();

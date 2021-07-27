@@ -1,5 +1,5 @@
-const urlHost = "http://localhost:8080";
-//const urlHost = "https://personalblog1996.herokuapp.com";
+//const urlHost = "http://localhost:8080";
+const urlHost = "https://personalblog1996.herokuapp.com";
 let idUrl = location.search == "" ? " " : Number(location.search.substr(1));
 console.log(idUrl);
 if (!Number.isInteger(idUrl)) {
