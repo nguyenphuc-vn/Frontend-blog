@@ -2,8 +2,8 @@ const token = localStorage.getItem('app-token');
 if(token ==undefined|| token =='' || token ==null){
   window.location.href =  "./login.html";
 }
-const urlHost = "http://localhost:8080";
-//const urlHost = "https://personalblog1996.herokuapp.com";
+//const urlHost = "http://localhost:8080";
+const urlHost = "https://personalblog1996.herokuapp.com";
 
 let urlParam = new URLSearchParams();
 let current = urlParam.get("page");

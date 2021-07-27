@@ -1,5 +1,5 @@
-const urlHost = "http://localhost:8080/api/news/";
-//const urlHost = "https://personalblog1996.herokuapp.com";
+//const urlHost = "http://localhost:8080/api/news/";
+const urlHost = "https://personalblog1996.herokuapp.com";
 let pageParam = Number(location.search.substr(4));
 //console.log(pageParam);
 

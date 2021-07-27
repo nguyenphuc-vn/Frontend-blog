@@ -1,5 +1,5 @@
-const urlHost = "http://localhost:8080";
-//const urlHost = "https://personalblog1996.herokuapp.com";
+//const urlHost = "http://localhost:8080";
+const urlHost = "https://personalblog1996.herokuapp.com";
 
 const ul = document.querySelector('.pagination');
 const container = document.querySelector('.mx-auto');
