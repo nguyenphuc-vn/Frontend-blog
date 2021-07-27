@@ -1,0 +1,33 @@
+
+img{
+    width: 150px;
+    height: 100px;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+a .title:hover{   
+    color: #E0933C;
+}
+
+
+.title{
+    margin: 2%;
+}
+.image{
+    margin: 3%;
+    float: left;
+}
+.desc{
+    position: relative;
+    top: 2%;
+    
+}
+
+.col-lg-6{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
