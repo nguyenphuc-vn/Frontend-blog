@@ -1,5 +1,5 @@
 //const urlHost = "http://localhost:8080/api/news/";
-const urlHost = "https://personalblog1996.herokuapp.com";
+const urlHost = "https://personalblog1996.herokuapp.com/api/news";
 const row = document.querySelector('.row');
 const ul = document.querySelectorAll('.pagination')[1];
 const articleLink = getPathFromUrl(window.location.href)+'article.html';
